@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>পুরনো দিনের গান · Nostalgic Bengali Songs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@500;800&family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#14213d;--ink2:#1d2d52;--chalk:#efe9da;--alta:#d6283b;--gold:#f2a81d;--mute:#9aa9c6}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--chalk);font:400 18px/1.7 "Hind Siliguri",system-ui,sans-serif}
+a{color:var(--gold)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+header.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center;padding:64px 0 40px}
+h1{font:800 clamp(2.6rem,7vw,4.6rem)/1.15 "Noto Serif Bengali",serif;margin:0 0 12px}
+.sub{color:var(--mute);max-width:34ch;margin:0}
+.record{width:min(320px,80vw);aspect-ratio:1;border-radius:50%;justify-self:center;
+ background:repeating-radial-gradient(circle,#0b1224 0 3px,#141c33 3px 6px);
+ box-shadow:0 0 0 6px #0b1224,0 20px 50px #0008;display:grid;place-items:center;position:relative}
+.record::after{content:"";position:absolute;inset:0;border-radius:50%;
+ background:conic-gradient(from 20deg,#fff0 0 20%,#ffffff14 25%,#fff0 32% 70%,#ffffff10 75%,#fff0 82%)}
+.label{width:36%;aspect-ratio:1;border-radius:50%;background:var(--alta);display:grid;place-items:center;
+ font:800 1.9rem "Noto Serif Bengali",serif;color:var(--chalk);z-index:1}
+.label::after{content:"";position:absolute;width:6%;aspect-ratio:1;border-radius:50%;background:var(--ink)}
+.record.spin{animation:spin 4s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.record.spin{animation:none}}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 20px}
+.filters button{background:none;border:1.5px solid var(--mute);color:var(--chalk);padding:4px 16px;border-radius:99px;font:inherit;font-size:.95rem;cursor:pointer}
+.filters button[aria-pressed=true]{background:var(--gold);border-color:var(--gold);color:var(--ink);font-weight:600}
+main{display:grid;grid-template-columns:1fr 1fr;gap:32px;padding-bottom:64px;align-items:start}
+ul{list-style:none;margin:0;padding:0}
+li button{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:1fr auto;gap:2px 16px;padding:14px 8px;border-bottom:1px solid #ffffff1f;cursor:pointer}
+li button:hover,li button[aria-current=true]{background:var(--ink2)}
+li button:focus-visible{outline:3px solid var(--gold);outline-offset:-3px}
+.bn{font:500 1.25rem/1.4 "Noto Serif Bengali",serif}
+.en{color:var(--mute);font-size:.95rem}
+.tag{color:var(--gold);font-size:.9rem;align-self:center;grid-row:1/3;grid-column:2}
+aside{position:sticky;top:16px;background:var(--ink2);padding:24px;border-left:5px solid var(--alta)}
+aside h2{font:800 1.6rem/1.3 "Noto Serif Bengali",serif;margin:0}
+aside p{margin:6px 0 16px;color:var(--mute)}
+iframe{width:100%;aspect-ratio:16/9;border:0;background:#000}
+.btn{display:inline-block;background:var(--alta);color:var(--chalk);padding:8px 20px;text-decoration:none;font-weight:600}
+footer{border-top:1px solid #ffffff1f;padding:24px 0 48px;color:var(--mute);font-size:.9rem}
+@media (max-width:760px){header.hero,main{grid-template-columns:1fr}aside{position:static}}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <header class="hero">
+  <div>
+   <h1>পুরনো দিনের গান</h1>
+   <p class="sub">Bengali songs from radio evenings, rainy windows and Puja holidays. Pick one to play.</p>
+  </div>
+  <div class="record" id="record" aria-hidden="true"><div class="label">গান</div></div>
+ </header>
+
+ <div class="filters" id="filters" role="group" aria-label="Filter songs by genre"></div>
+
+ <main>
+  <ul id="list"></ul>
+  <aside aria-live="polite" id="player">
+   <h2>Choose a song</h2>
+   <p>Select any title on the left to listen.</p>
+  </aside>
+ </main>
+
+ <footer>Songs play from YouTube. Lyrics are not reproduced here. Each song belongs to its original artists and rights holders.</footer>
+</div>
+
+<script>
+/* EDIT THIS LIST. Add your own songs.
+   yt: paste a YouTube video ID (the part after v=) to embed the song.
+   Leave yt empty and the site shows a "Find on YouTube" button instead. */
+const songs = [
+ {bn:"একলা চলো রে", en:"Ekla Cholo Re", by:"Rabindranath Tagore", genre:"Rabindrasangeet", yt:"", note:"A song about walking on alone when nobody follows."},
+ {bn:"আমার মুক্তি আলোয় আলোয়", en:"Amar Mukti Alote Alote", by:"Rabindranath Tagore", genre:"Rabindrasangeet", yt:"", note:"Freedom found in light, a favourite for early mornings."},
+ {bn:"আমি চিনি গো চিনি তোমারে", en:"Ami Chini Go Chini Tomare", by:"Rabindranath Tagore", genre:"Rabindrasangeet", yt:"", note:"A stranger you somehow already know."},
+ {bn:"মন মোর মেঘের সঙ্গী", en:"Mono Mor Megher Shongi", by:"Rabindranath Tagore", genre:"Rabindrasangeet", yt:"", note:"The mind drifting with the monsoon clouds."},
+ {bn:"ধনধান্য পুষ্প ভরা", en:"Dhono Dhanyo Pushpo Bhora", by:"Dwijendralal Ray", genre:"Dwijendrageeti", yt:"", note:"An old patriotic song many learned at school."},
+ {bn:"কফি হাউসের সেই আড্ডাটা", en:"Coffee Houser Shei Adda-ta", by:"Manna Dey", genre:"Adhunik", yt:"", note:"Remembering the long adda at College Street."}
+];
+
+const list=document.getElementById('list'), player=document.getElementById('player'),
+      rec=document.getElementById('record'), filters=document.getElementById('filters');
+let genre='All', current=null;
+
+function el(tag,props={},kids=[]){const e=document.createElement(tag);Object.assign(e,props);kids.forEach(k=>e.append(k));return e}
+
+function renderFilters(){
+  filters.replaceChildren();
+  ['All',...new Set(songs.map(s=>s.genre))].forEach(g=>{
+    const b=el('button',{type:'button',textContent:g});
+    b.setAttribute('aria-pressed',g===genre);
+    b.onclick=()=>{genre=g;renderFilters();renderList()};
+    filters.append(b);
+  });
+}
+
+function renderList(){
+  list.replaceChildren();
+  songs.filter(s=>genre==='All'||s.genre===genre).forEach(s=>{
+    const b=el('button',{type:'button'},[
+      el('span',{className:'bn',textContent:s.bn}),
+      el('span',{className:'tag',textContent:s.genre}),
+      el('span',{className:'en',textContent:s.en+' · '+s.by})
+    ]);
+    if(current===s) b.setAttribute('aria-current','true');
+    b.onclick=()=>play(s);
+    list.append(el('li',{},[b]));
+  });
+}
+
+function play(s){
+  current=s;
+  const media = s.yt
+    ? el('iframe',{src:'https://www.youtube-nocookie.com/embed/'+encodeURIComponent(s.yt)+'?autoplay=1',title:s.en,allow:'autoplay; encrypted-media',allowFullscreen:true})
+    : el('a',{className:'btn',target:'_blank',rel:'noopener',textContent:'Find on YouTube',
+        href:'https://www.youtube.com/results?search_query='+encodeURIComponent(s.en+' '+s.by)});
+  player.replaceChildren(el('h2',{textContent:s.bn}),el('p',{textContent:s.en+' · '+s.by+'. '+s.note}),media);
+  rec.classList.add('spin');
+  renderList();
+}
+
+renderFilters();renderList();
+</script>
+</body>
+</html>
